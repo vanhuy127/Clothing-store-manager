@@ -1,0 +1,117 @@
+.size-options,
+.color-options {
+  margin: 20px 0;
+}
+
+.size-options span,
+.color-options span {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.sizes,
+.colors {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.size,
+.color {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.size {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  line-height: 40px;
+}
+
+.size:hover {
+  background-color: #ddd;
+  border-color: #333;
+}
+
+.size.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.color {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.color:hover {
+  border-color: #333;
+  padding: 5px;
+  transform: scale(1.1);
+}
+
+.color.active {
+  border-color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: Add a focus ring for accessibility */
+.size:focus,
+.color:focus {
+  outline: 3px solid #ff9c00;
+}
+
+.change-quantity {
+  padding: 0 10px;
+  border: 1px #eeeeee solid;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.bx-minus::before,
+.bx-plus::before {
+  cursor: pointer;
+}
+.change-quantity input {
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.add-to-card {
+  transition: all ease-in-out 0.3s;
+}
+.add-to-card:hover {
+  transform: scale(1.03);
+}
+#prodetails .single-pro-details {
+  padding-top: 0px !important;
+}
+#prodetails .single-pro-details h4 {
+  padding: 20px 0 20px 0 !important;
+}
