@@ -60,7 +60,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
         <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <!-- <li class="nav-item">
-                    <a class="nav-link" href="../dashBoard/_index.php?page=show">
+                    <a class="nav-link" href="../dashboard.html">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
@@ -69,7 +69,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link active" href="_index.php?page=show">
+                    <a class="nav-link " href="../products/_index.php?page=show">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -141,7 +141,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../receipt/_index.php?page=show">
+                    <a class="nav-link active" href="../receipt/_index.php?page=show">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -197,39 +197,6 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                 switch ($_GET['page']) {
                     case 'show':
                         require_once './show.php';
-                        break;
-                    case 'add':
-                        require_once './add.php';
-                        break;
-                    case 'edit':
-                        require_once './edit.php';
-                        break;
-                    case 'delete':
-                        require_once './delete.php';
-                        break;
-                    case 'add_image':
-                        require_once './addImage.php';
-                        break;
-                    case 'edit_image':
-                        require_once './editImage.php';
-                        break;
-                    case 'delete_image':
-                        require_once './deleteImage.php';
-                        break;
-                    case 'delete_image':
-                        require_once './deleteImage.php';
-                        break;
-                    case 'add_variant':
-                        require_once './addVariant.php';
-                        break;
-                    case 'edit_variant':
-                        require_once './editVariant.php';
-                        break;
-                    case 'delete_variant':
-                        require_once './deleteVariant.php';
-                        break;
-                    case 'stock_in':
-                        require_once './stockIn.php';
                         break;
                     default:
                         require_once './show.php';

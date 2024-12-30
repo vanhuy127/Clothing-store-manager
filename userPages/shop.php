@@ -118,18 +118,18 @@ $count = $cartBO->getCount();
                 <li id="lg-bag">
                     <a href="cart.php" style="z-index: -1;"><i class="bx bx-shopping-bag"></i></a>
                     <?php if ($count > 0): ?>
-                        <div class="badge-custom"><?= htmlspecialchars($count) ?></div>
+                    <div class="badge-custom"><?= htmlspecialchars($count) ?></div>
                     <?php endif; ?>
                 </li>
                 <?php if (isset($_SESSION['roles']) && in_array(Role::$CUSTOMER, $_SESSION['roles'])): ?>
-                    <li>Xin chào, <?= htmlspecialchars($_SESSION['username']) ?></li>
-                    <div>
-                        <a class="btn btn-primary mb-0" href="../logout.php">Sign out</a>
-                    </div>
+                <li>Xin chào, <?= htmlspecialchars($_SESSION['username']) ?></li>
+                <div>
+                    <a class="btn btn-primary mb-0" href="../logout.php">Sign out</a>
+                </div>
                 <?php else: ?>
-                    <div>
-                        <a class="btn btn-primary mb-0" href="../login.php">Sign in</a>
-                    </div>
+                <div>
+                    <a class="btn btn-primary mb-0" href="../login.php">Sign in</a>
+                </div>
                 <?php endif ?>
                 <a href="#" id="close"><i class="bx bx-x"></i></a>
             </ul>
@@ -156,9 +156,9 @@ $count = $cartBO->getCount();
             <select class="form-control" name="category" id="exampleFormControlSelect1">
                 <option value="">--Chọn danh mục--</option>
                 <?php foreach ($categories as $c): ?>
-                    <option value="<?= htmlspecialchars($c->getCategoryID()) ?>"
-                        <?= $categorySession == $c->getCategoryID() ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($c->getCategoryName()) ?></option>
+                <option value="<?= htmlspecialchars($c->getCategoryID()) ?>"
+                    <?= $categorySession == $c->getCategoryID() ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($c->getCategoryName()) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -170,7 +170,7 @@ $count = $cartBO->getCount();
                 <span class="input-group-text" id="basic-addon2">VND</span>
             </div>
         </div>
-        <div class="form-group col-sm">
+        <div class="form-group col-sm ">
             <label for="example-number-input" class="form-control-label">Đến</label>
             <div class="input-group">
                 <input class="form-control price-input" type="text" name="price_to"
@@ -185,8 +185,8 @@ $count = $cartBO->getCount();
         <div class="pro-container">
             <!-- Hiển thị danh sách sản phẩm -->
             <?php if (!empty($productDetails)): ?>
-                <?php foreach ($productDetails as $detail): ?>
-                    <?php
+            <?php foreach ($productDetails as $detail): ?>
+            <?php
                     $imagePath = $detail->getImages();
                     $firstImagePath = "no-product.png";
                     if (!empty($imagePath)) {
@@ -200,13 +200,13 @@ $count = $cartBO->getCount();
                     }
                     $rate = $detail->getRate();
                     ?>
-                    <div class="pro" onclick="window.location.href='product.php?id=<?= $detail->getProductID() ?>';">
-                        <img class="shirt" src="../image-storage/<?= $firstImagePath ?>" alt="Product Image" />
-                        <div class="des">
-                            <span><?= htmlspecialchars($detail->getCategoryName()) ?></span>
-                            <h5><?= htmlspecialchars($detail->getProductName()) ?></h5>
-                            <div class="star">
-                                <?php
+            <div class="pro" onclick="window.location.href='product.php?id=<?= $detail->getProductID() ?>';">
+                <img class="shirt" src="../image-storage/<?= $firstImagePath ?>" alt="Product Image" />
+                <div class="des">
+                    <span><?= htmlspecialchars($detail->getCategoryName()) ?></span>
+                    <h5><?= htmlspecialchars($detail->getProductName()) ?></h5>
+                    <div class="star">
+                        <?php
                                 for ($x = 1; $x <= floor($rate); $x++) {
                                     echo '<i class="bx bxs-star"></i>'; // In ra ngôi sao đầy
                                 }
@@ -221,20 +221,20 @@ $count = $cartBO->getCount();
                                     echo '<i class="bx bx-star"></i>'; // In ra ngôi sao rỗng
                                 }
                                 ?>
-                            </div>
-                            <h4>
-                                <?= $firstVariantPrice > 0
+                    </div>
+                    <h4>
+                        <?= $firstVariantPrice > 0
                                     ? number_format($firstVariantPrice, 0, ',') . ' VND'
                                     : 'Giá chưa được khởi tạo' ?>
-                            </h4>
-                        </div>
-                        <a
-                            href="./cart/addToCart.php?id=<?= $detail->getProductID() ?>&vid=<?= $detail->getVariants()[0]['id'] ?>"><i
-                                class="bx bx-cart cart"></i></a>
-                    </div>
-                <?php endforeach; ?>
+                    </h4>
+                </div>
+                <a
+                    href="./cart/addToCart.php?id=<?= $detail->getProductID() ?>&vid=<?= $detail->getVariants()[0]['id'] ?>"><i
+                        class="bx bx-cart cart"></i></a>
+            </div>
+            <?php endforeach; ?>
             <?php else: ?>
-                <h4 class="mx-auto">No products found.</h4>
+            <h4 class="mx-auto">No products found.</h4>
             <?php endif; ?>
         </div>
     </section>
@@ -337,20 +337,20 @@ $count = $cartBO->getCount();
     <!-- ADMINPAGE THEME -->
 
     <script>
-        // Chọn tất cả các input có class "price-input"
-        const priceInputs = document.querySelectorAll('.price-input');
+    // Chọn tất cả các input có class "price-input"
+    const priceInputs = document.querySelectorAll('.price-input');
 
-        priceInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                const value = this.value.replace(/,/g, ''); // Loại bỏ dấu phẩy
-                if (!isNaN(value) && value.length > 0) {
-                    // Đảm bảo không có giá trị lỗi và định dạng lại
-                    this.value = Number(value).toLocaleString('en-US');
-                } else {
-                    this.value = ''; // Xóa nếu không phải số hợp lệ
-                }
-            });
+    priceInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const value = this.value.replace(/,/g, ''); // Loại bỏ dấu phẩy
+            if (!isNaN(value) && value.length > 0) {
+                // Đảm bảo không có giá trị lỗi và định dạng lại
+                this.value = Number(value).toLocaleString('en-US');
+            } else {
+                this.value = ''; // Xóa nếu không phải số hợp lệ
+            }
         });
+    });
     </script>
 
     <script src="../script.js"></script>

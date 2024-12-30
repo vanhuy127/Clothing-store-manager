@@ -35,6 +35,11 @@ class VariantBO
         return $this->variantDAO->update($variant);
     }
 
+    public function stockIn(Variant $variant)
+    {
+        return $this->variantDAO->stockIn($variant);
+    }
+
     public function deleteVariant($variantID)
     {
         return $this->variantDAO->delete($variantID);

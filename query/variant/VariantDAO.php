@@ -154,6 +154,30 @@ class VariantDAO
         return $variants;
     }
 
+    public function stockIn($variant)
+    {
+        $sqlInsert = "INSERT INTO receipt (variantID, productID, quantity, date)
+                VALUES (?, ?, ?, NOW());";
+        $stmtInsert = $this->dbConnection->prepare($sqlInsert);
+        if ($stmtInsert === false) {
+            return false;
+        }
+        $variantID = $variant->getVariantID();
+        $productID = $variant->getProductID();
+        $quantity = $variant->getStock();
+
+        $stmtInsert->bind_param('iii', $variantID, $productID, $quantity);
+        $stmtInsert->execute();
+        $sqlUpdate = "UPDATE variants SET stock = stock + ? WHERE variantID = ?";
+        $stmtUpdate = $this->dbConnection->prepare($sqlUpdate);
+        if ($stmtUpdate === false) {
+            return false;
+        }
+        $stmtUpdate->bind_param('ii', $quantity, $variantID);
+        $stmtUpdate->execute();
+        return true;
+    }
+
     private function mapRowToVariant($row)
     {
         return new Variant(

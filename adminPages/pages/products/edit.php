@@ -81,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select class="form-control" id="unit" name="unitID" required>
                             <option value="">-----Chọn đơn vị-----</option>
                             <?php foreach ($units as $u): ?>
-                                <option value="<?= $u->getUnitID() ?>"
-                                    <?= $product->getUnitID() == $u->getUnitID() ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($u->getName()) ?>
-                                </option>
+                            <option value="<?= $u->getUnitID() ?>"
+                                <?= $product->getUnitID() == $u->getUnitID() ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($u->getName()) ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -93,10 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select class="form-control" id="supplier" name="supplierID" required>
                             <option value="">-----Chọn nhà cung cấp-----</option>
                             <?php foreach ($suppliers as $s): ?>
-                                <option value="<?= $s->getSupplierID() ?>"
-                                    <?= $product->getSupplierID() == $s->getSupplierID() ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($s->getName()) ?>
-                                </option>
+                            <option value="<?= $s->getSupplierID() ?>"
+                                <?= $product->getSupplierID() == $s->getSupplierID() ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($s->getName()) ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -105,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <select class="form-control" id="category" name="categoryID" required>
                             <option value="">-----Chọn loại hàng-----</option>
                             <?php foreach ($categories as $c): ?>
-                                <option value="<?= $c->getCategoryID() ?>"
-                                    <?= $product->getCategoryID() == $c->getCategoryID() ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($c->getCategoryName()) ?>
-                                </option>
+                            <option value="<?= $c->getCategoryID() ?>"
+                                <?= $product->getCategoryID() == $c->getCategoryID() ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($c->getCategoryName()) ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -151,40 +151,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </thead>
                         <tbody>
                             <?php if (!empty($images)): ?>
-                                <?php foreach ($images as $image): ?>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <img src="../../../image-storage/<?= htmlspecialchars($image->getPath()) ?>"
-                                                    class="avatar avatar-xl me-3" alt="Product Image" />
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p class="text-xl text-secondary mb-0">
-                                                <?= htmlspecialchars($image->getOrderNumber()) ?>
-                                            </p>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <a href="_index.php?page=edit_image&id=<?= $image->getImageID() ?>&productID=<?= $product->getProductID() ?>"
-                                                class="btn bg-gradient-info" data-toggle="tooltip" title="Edit Image"
-                                                style="margin-bottom: 0 !important;">
-                                                Edit
-                                            </a>
-                                            <a href="_index.php?page=delete_image&id=<?= $image->getImageID() ?>&productID=<?= $id ?>"
-                                                class="btn bg-gradient-danger" data-toggle="tooltip" title="Delete Image"
-                                                style="margin-bottom: 0 !important;"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này?')">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                            <?php foreach ($images as $image): ?>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1">
+                                        <img src="../../../image-storage/<?= htmlspecialchars($image->getPath()) ?>"
+                                            class="avatar avatar-xl me-3" alt="Product Image" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="text-xl text-secondary mb-0">
+                                        <?= htmlspecialchars($image->getOrderNumber()) ?>
+                                    </p>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="_index.php?page=edit_image&id=<?= $image->getImageID() ?>&productID=<?= $product->getProductID() ?>"
+                                        class="btn bg-gradient-info" data-toggle="tooltip" title="Edit Image"
+                                        style="margin-bottom: 0 !important;">
+                                        Edit
+                                    </a>
+                                    <a href="_index.php?page=delete_image&id=<?= $image->getImageID() ?>&productID=<?= $id ?>"
+                                        class="btn bg-gradient-danger" data-toggle="tooltip" title="Delete Image"
+                                        style="margin-bottom: 0 !important;"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa ảnh này?')">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                             <?php else: ?>
-                                <tr>
-                                    <td colspan="3" class="text-center">
-                                        <p class="text-secondary mb-0">Không có ảnh nào được liên kết với sản phẩm này.</p>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <p class="text-secondary mb-0">Không có ảnh nào được liên kết với sản phẩm này.</p>
+                                </td>
+                            </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
@@ -219,63 +219,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </thead>
                         <tbody>
                             <?php if (!empty($detailVariants)): ?>
-                                <?php foreach ($detailVariants as $detail):
+                            <?php foreach ($detailVariants as $detail):
                                     $variant = $detail['variant'];
                                     $sizeName = $detail['sizeName'] ?? '-';
                                     $colorCode = $detail['colorCode'] ?? '-';
                                 ?>
-                                    <tr>
-                                        <!-- Kích thước -->
-                                        <td>
-                                            <p class="text-xl text-secondary mb-0">
-                                                <?= htmlspecialchars($sizeName) ?>
-                                            </p>
-                                        </td>
-                                        <!-- Màu sắc -->
-                                        <td>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <div
-                                                    style="width: 30px; height: 30px; background-color: <?= htmlspecialchars($colorCode) ?>; border-radius: 5px;">
-                                                </div>
-                                                <p class="text-xl text-secondary mb-0">
-                                                    <?= htmlspecialchars($colorCode) ?>
-                                                </p>
-                                            </div>
-                                        </td>
-                                        <!-- Giá -->
-                                        <td>
-                                            <p class="text-xl text-secondary mb-0">
-                                                <?= number_format($variant->getPrice(), 0, ',') ?> VND
-                                            </p>
-                                        </td>
-                                        <!-- Kho -->
-                                        <td>
-                                            <p class="text-xl text-secondary mb-0">
-                                                <?= htmlspecialchars($variant->getStock()) ?>
-                                            </p>
-                                        </td>
-                                        <!-- Hành động -->
-                                        <td class="align-middle text-center">
-                                            <a href="_index.php?page=edit_variant&id=<?= $variant->getVariantID() ?>&productID=<?= htmlspecialchars($id) ?>"
-                                                class="btn bg-gradient-info" data-toggle="tooltip" title="Sửa biến thể"
-                                                style="margin-bottom: 0 !important;">
-                                                Edit
-                                            </a>
-                                            <a href="_index.php?page=delete_variant&id=<?= $variant->getVariantID() ?>&productID=<?= htmlspecialchars($id) ?>"
-                                                class="btn bg-gradient-danger" data-toggle="tooltip" title="Xóa biến thể"
-                                                style="margin-bottom: 0 !important;"
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa biến thể này?')">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                            <tr>
+                                <!-- Kích thước -->
+                                <td>
+                                    <p class="text-xl text-secondary mb-0">
+                                        <?= htmlspecialchars($sizeName) ?>
+                                    </p>
+                                </td>
+                                <!-- Màu sắc -->
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div
+                                            style="width: 30px; height: 30px; background-color: <?= htmlspecialchars($colorCode) ?>; border-radius: 5px;">
+                                        </div>
+                                        <p class="text-xl text-secondary mb-0">
+                                            <?= htmlspecialchars($colorCode) ?>
+                                        </p>
+                                    </div>
+                                </td>
+                                <!-- Giá -->
+                                <td>
+                                    <p class="text-xl text-secondary mb-0">
+                                        <?= number_format($variant->getPrice(), 0, ',') ?> VND
+                                    </p>
+                                </td>
+                                <!-- Kho -->
+                                <td>
+                                    <p class="text-xl text-secondary mb-0">
+                                        <?= htmlspecialchars($variant->getStock()) ?>
+                                    </p>
+                                </td>
+                                <!-- Hành động -->
+                                <td class="align-middle text-center">
+                                    <a href="_index.php?page=stock_in&id=<?= $variant->getVariantID() ?>&productID=<?= htmlspecialchars($id) ?>"
+                                        class="btn bg-gradient-info" data-toggle="tooltip" title="Nhập thêm hàng"
+                                        style="margin-bottom: 0 !important;">
+                                        Stock in
+                                    </a>
+                                    <a href="_index.php?page=edit_variant&id=<?= $variant->getVariantID() ?>&productID=<?= htmlspecialchars($id) ?>"
+                                        class="btn bg-gradient-info" data-toggle="tooltip" title="Sửa biến thể"
+                                        style="margin-bottom: 0 !important;">
+                                        Edit
+                                    </a>
+                                    <a href="_index.php?page=delete_variant&id=<?= $variant->getVariantID() ?>&productID=<?= htmlspecialchars($id) ?>"
+                                        class="btn bg-gradient-danger" data-toggle="tooltip" title="Xóa biến thể"
+                                        style="margin-bottom: 0 !important;"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa biến thể này?')">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
                             <?php else: ?>
-                                <tr>
-                                    <td colspan="5" class="text-center">
-                                        <p class="text-secondary mb-0">Không có biến thể nào cho sản phẩm này.</p>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <p class="text-secondary mb-0">Không có biến thể nào cho sản phẩm này.</p>
+                                </td>
+                            </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>

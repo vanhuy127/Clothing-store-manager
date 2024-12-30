@@ -1,6 +1,9 @@
 <?php
 require_once "../../../query/constant/Role.php";
-ob_start();
+
+ob_start(); //<--- Dòng code yêu cầu Output Buffering
+// Cấu hình để PHP hiện tất cả Lỗi (ERROR) và Cảnh báo (WARNING)
+// Chỉ nên sử dụng khi đang phát triển
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -57,19 +60,19 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
             </a>
         </div>
         <hr class="horizontal dark mt-0" />
-        <div class="collapse navbar-collapse w-auto h-100" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="../dashBoard/_index.php?page=show">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Thống kê</span>
                     </a>
-                </li> -->
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="_index.php?page=show">
+                    <a class="nav-link" href="../products/_index.php?page=show">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -123,7 +126,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../colors/_index.php?page=show">
+                    <a class="nav-link active" href="_index.php?page=show">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
@@ -158,7 +161,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
             data-scroll="false">
             <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
-                    <h6 class="font-weight-bolder text-white mb-0">Quản lý mặt hàng</h6>
+                    <h6 class="font-weight-bolder text-white mb-0">Thống kê</h6>
                 </nav>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <ul class="navbar-nav justify-content-end w-100">
@@ -198,39 +201,6 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                     case 'show':
                         require_once './show.php';
                         break;
-                    case 'add':
-                        require_once './add.php';
-                        break;
-                    case 'edit':
-                        require_once './edit.php';
-                        break;
-                    case 'delete':
-                        require_once './delete.php';
-                        break;
-                    case 'add_image':
-                        require_once './addImage.php';
-                        break;
-                    case 'edit_image':
-                        require_once './editImage.php';
-                        break;
-                    case 'delete_image':
-                        require_once './deleteImage.php';
-                        break;
-                    case 'delete_image':
-                        require_once './deleteImage.php';
-                        break;
-                    case 'add_variant':
-                        require_once './addVariant.php';
-                        break;
-                    case 'edit_variant':
-                        require_once './editVariant.php';
-                        break;
-                    case 'delete_variant':
-                        require_once './deleteVariant.php';
-                        break;
-                    case 'stock_in':
-                        require_once './stockIn.php';
-                        break;
                     default:
                         require_once './show.php';
                         break;
@@ -245,7 +215,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                             <div class="copyright text-center text-sm text-muted text-lg-start">
                                 ©
                                 <script>
-                                    document.write(new Date().getFullYear());
+                                document.write(new Date().getFullYear());
                                 </script>
                                 , made with <i class="fa fa-heart"></i> by
                                 <a href="#" class="font-weight-bold" target="_blank">YUHNAV
@@ -262,29 +232,107 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
     <script src="../../../assets/js/core/bootstrap.min.js"></script>
     <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../../../assets/js/plugins/chartjs.min.js"></script>
     <script>
-        // Lấy input price
-        const priceInput = document.getElementById('price');
+    var ctx1 = document.getElementById("chart-line").getContext("2d");
 
-        // Định dạng giá theo hàng ngàn
-        priceInput.addEventListener('input', function() {
-            const value = this.value.replace(/,/g, ''); // Loại bỏ dấu phẩy
-            if (!isNaN(value) && value.length > 0) {
-                // Đảm bảo không có giá trị lỗi và định dạng lại
-                this.value = Number(value).toLocaleString('en-US');
-            } else {
-                this.value = ''; // Xóa nếu không phải số hợp lệ
-            }
-        });
+    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, "rgba(94, 114, 228, 0.2)");
+    gradientStroke1.addColorStop(0.2, "rgba(94, 114, 228, 0.0)");
+    gradientStroke1.addColorStop(0, "rgba(94, 114, 228, 0)");
+    new Chart(ctx1, {
+        type: "line",
+        data: {
+            labels: [
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ],
+            datasets: [{
+                label: "Mobile apps",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#5e72e4",
+                backgroundColor: gradientStroke1,
+                borderWidth: 3,
+                fill: true,
+                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                maxBarThickness: 6,
+            }, ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+            interaction: {
+                intersect: false,
+                mode: "index",
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                    },
+                    ticks: {
+                        display: true,
+                        padding: 10,
+                        color: "#fbfbfb",
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: "normal",
+                            lineHeight: 2,
+                        },
+                    },
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: false,
+                        drawOnChartArea: false,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                    },
+                    ticks: {
+                        display: true,
+                        color: "#ccc",
+                        padding: 20,
+                        font: {
+                            size: 11,
+                            family: "Open Sans",
+                            style: "normal",
+                            lineHeight: 2,
+                        },
+                    },
+                },
+            },
+        },
+    });
     </script>
     <script>
-        var win = navigator.platform.indexOf("Win") > -1;
-        if (win && document.querySelector("#sidenav-scrollbar")) {
-            var options = {
-                damping: "0.5",
-            };
-            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
-        }
+    var win = navigator.platform.indexOf("Win") > -1;
+    if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+            damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+    }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

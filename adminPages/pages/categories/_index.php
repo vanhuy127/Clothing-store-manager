@@ -60,7 +60,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
             </a>
         </div>
         <hr class="horizontal dark mt-0" />
-        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse w-auto  h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="../products/_index.php?page=show">
@@ -132,6 +132,15 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                             <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../receipt/_index.php?page=show">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Quản lý nhập kho</span>
                     </a>
                 </li>
             </ul>
@@ -206,7 +215,7 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
                             <div class="copyright text-center text-sm text-muted text-lg-start">
                                 ©
                                 <script>
-                                document.write(new Date().getFullYear());
+                                    document.write(new Date().getFullYear());
                                 </script>
                                 , made with <i class="fa fa-heart"></i> by
                                 <a href="#" class="font-weight-bold" target="_blank">YUHNAV
@@ -225,13 +234,13 @@ if (isset($_SESSION['roles']) && in_array(Role::$ADMIN, $_SESSION['roles'])) {
     <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
 
     <script>
-    var win = navigator.platform.indexOf("Win") > -1;
-    if (win && document.querySelector("#sidenav-scrollbar")) {
-        var options = {
-            damping: "0.5",
-        };
-        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
-    }
+        var win = navigator.platform.indexOf("Win") > -1;
+        if (win && document.querySelector("#sidenav-scrollbar")) {
+            var options = {
+                damping: "0.5",
+            };
+            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+        }
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
